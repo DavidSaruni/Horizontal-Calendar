@@ -97,10 +97,16 @@ class MainActivity : AppCompatActivity(), CalendarAdapter.CalendarInterface {
             monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
+        // Populate the dateList with the CalendarData objects
+        dates.forEach { date ->
+            dateList.add(CalendarData(date, isSelected = date == mStartD))
+        }
+
         calendarList.clear()
         calendarList.addAll(dateList)
         calendarAdapter.updateList(dateList)
 
+        // Scroll to the selected date position
         for (item in dateList.indices) {
             if (dateList[item].data == mStartD) {
                 calendarAdapter.setPosition(item)
